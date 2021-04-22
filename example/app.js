@@ -1,7 +1,7 @@
 let quizObject = null;
 
 function init() {
-    quizObject = new JsonQuizParser({
+    quizObject = new Quiz({
         divId: "quiz",
         jsonPath: "qs.json",
         answerClass: "answer",
@@ -13,8 +13,4 @@ function init() {
     quizObject.parseQuizFromJson().then(() => {
         quizObject.displayHTMLQuiz()
     });
-}
-
-function evaluate_quiz() {
-    // quizObject.checkQuizAnswers();
 }

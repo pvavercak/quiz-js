@@ -2,7 +2,7 @@
  * @copyright vavercak.pato@gmail.com
  */
 
-class JsonQuizParser {
+class Quiz {
 
     constructor({divId, jsonPath, answerClass, questionClass, labelClass, 
         correctAnswerClass, wrongAnswerClass, explanationClass, submitButtonId}) {
