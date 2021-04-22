@@ -3,7 +3,7 @@ let quizObject = null;
 function init() {
     quizObject = new Quiz({
         divId: "quiz",
-        jsonPath: "qs.json",
+        jsonPath: "sample_questions.json",
         answerClass: "answer",
         questionClass: "question",
         labelClass: "radio-label",
