@@ -40,4 +40,8 @@ JSON file with answers `MUST HAVE` the following structure
 }
 ```
 
+### Screenshots
+- ![initial_quiz_state.png](https://github.com/pvavercak/quiz-js/blob/master/img/initial_quiz_state.png?raw=true)
+- ![initial_quiz_state.png](https://github.com/pvavercak/quiz-js/blob/master/img/selected_answers.png?raw=true)
+
 `See example folder for more info.`
