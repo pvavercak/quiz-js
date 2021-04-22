@@ -4,9 +4,8 @@
 
 class JsonQuizParser {
 
-    constructor({divId, jsonPath, answerClass, questionClass,
-        labelClass, correctAnswerClass,
-        wrongAnswerClass, submitButtonId}) {
+    constructor({divId, jsonPath, answerClass, questionClass, labelClass, 
+        correctAnswerClass, wrongAnswerClass, explanationClass, submitButtonId}) {
         this.quiz = [];
         this.quizData = null;
         this.quizDataPath = jsonPath;
@@ -16,6 +15,7 @@ class JsonQuizParser {
         this.labelClass = labelClass;
         this.correctAnswerClass = correctAnswerClass;
         this.wrongAnswerClass = wrongAnswerClass;
+        this.explanationClass = explanationClass;
         this.submitButton = document.getElementById(submitButtonId);
     }
 
@@ -54,8 +54,11 @@ class JsonQuizParser {
                 }
 
                 this.quiz.push(
-                    `<div class="${this.questionClass}"> ${question.question} </div>
-                    <div class="${this.answerClass}"> ${options.join('')} </div>`
+                    `<div>
+                    <div class="${this.questionClass}"> ${question.question} </div>
+                    <div class="${this.answerClass}"> ${options.join('')} </div>
+                    <div class="${this.explanationClass}">${question.explanation}</div>
+                    </div>`
                 );
             }
         );
