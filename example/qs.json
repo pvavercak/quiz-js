@@ -6,7 +6,7 @@
             "b": "You"
         },
         "correctAnswer": "a",
-        "explanation": "lebo"
+        "explanation": "I am the boss"
     },
     {
         "question": "Where?",
@@ -16,7 +16,7 @@
             "c": "Elsewhere"
         },
         "correctAnswer": "a",
-        "explanation": "lebo"
+        "explanation": "We love Slovakia"
     }
 ]
 }

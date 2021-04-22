@@ -1,67 +1,92 @@
-let quizContainer = null;
-let quizData = null;
+/**
+ * @copyright vavercak.pato@gmail.com
+ */
 
-function setQuizData(data) {
-    quizData = data;
-}
+class JsonQuizParser {
 
-function createHTMLQuiz(div_id) {
-    fetch('./qs.json')
-        .then(response => response.json())
-        .then(data => setQuizData(data.quizData))
-        .then(() => buildHTMLQuiz(div_id))
-        .catch(err => console.log(err));
-}
+    constructor({divId, jsonPath, answerClass, questionClass,
+        labelClass, correctAnswerClass,
+        wrongAnswerClass, submitButtonId}) {
+        this.quiz = [];
+        this.quizData = null;
+        this.quizDataPath = jsonPath;
+        this.quizContainer = document.getElementById(divId);
+        this.answerClass = answerClass;
+        this.questionClass = questionClass;
+        this.labelClass = labelClass;
+        this.correctAnswerClass = correctAnswerClass;
+        this.wrongAnswerClass = wrongAnswerClass;
+        this.submitButton = document.getElementById(submitButtonId);
+    }
 
-function buildHTMLQuiz(div_id) {
-    quizContainer = document.getElementById(div_id);
+    parseQuizFromJson = () => {
+        return new Promise((resolve, reject) => {
+            fetch(this.quizDataPath)
+                .then(response => response.json())
+                .then(data => this.quizData = data.quizData)
+                .then(() => this.buildHTMLQuiz())
+                .then(() => resolve())
+                .catch(err => reject());
+        })
+    }
 
-    let quiz = [];
+    displayHTMLQuiz = () => {
+        this.quizContainer.innerHTML = this.quiz.join('');
+    }
 
-    quizData.forEach(
-        (question, index) => {
+    /**
+     * 
+     */
+    buildHTMLQuiz = () => {
+        this.quizData.forEach(
+            (question, index) => {
 
-            let options = [];
+                let options = [];
 
-            for (let option in question.answers) {
-                options.push(
-                    `<label class="radio-label">
-                <input type="radio" name="q${index}" value="${option}"/>
-                ${option} :
-                ${question.answers[option]}
-                </label>`
+                for (let option in question.answers) {
+                    options.push(
+                        `<label class="${this.labelClass}">
+                        <input type="radio" name="q${index}" value="${option}"/>
+                        ${option} :
+                        ${question.answers[option]}
+                        </label>`
+                    );
+                }
+
+                this.quiz.push(
+                    `<div class="${this.questionClass}"> ${question.question} </div>
+                    <div class="${this.answerClass}"> ${options.join('')} </div>`
                 );
             }
+        );
 
-            quiz.push(
-                `<div class="question"> ${question.question} </div>
-            <div class="answers"> ${options.join('')} </div>`
-            );
-        });
+        this.submitButton.addEventListener('click', this.checkQuizAnswers);
+    }
 
-    quizContainer.innerHTML = quiz.join('');
-}
+    /**
+     * 
+     */
+    checkQuizAnswers = () => {
+        let answerContainers = this.quizContainer.querySelectorAll(`.${this.answerClass}`);
+        let numCorrect = 0;
 
-function checkQuizAnswers() {
-    let answerContainers = quizContainer.querySelectorAll('.answers');
-    let numCorrect = 0;
+        this.quizData.forEach(
+            (question, index) => {
+                let answerContainer = answerContainers[index];
+                const selector = `input[name=q${index}]:checked`;
+                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
-    quizData.forEach(
-        (question, index) => {
-            let answerContainer = answerContainers[index];
-            const selector = `input[name=q${index}]:checked`;
-            const userAnswer = (answerContainer.querySelector(selector) || {}).value;
-
-            if (userAnswer === question.correctAnswer) {
-                numCorrect++;
-                answerContainers[index].classList.add("correct-answer");
-                answerContainers[index].classList.remove("wrong-answer");
-            } else {
-                answerContainers[index].classList.remove("correct-answer");
-                answerContainers[index].classList.add("wrong-answer");
+                if (userAnswer === question.correctAnswer) {
+                    numCorrect++;
+                    answerContainers[index].classList.add(this.correctAnswerClass);
+                    answerContainers[index].classList.remove(this.wrongAnswerClass);
+                } else {
+                    answerContainers[index].classList.remove(this.correctAnswerClass);
+                    answerContainers[index].classList.add(this.wrongAnswerClass);
+                }
             }
-        }
-    );
+        );
 
-    document.getElementById("results").innerHTML = `${numCorrect} out of ${quizData.length}`;
+        document.getElementById("results").innerHTML = `${numCorrect} out of ${this.quizData.length}`;
+    }
 }

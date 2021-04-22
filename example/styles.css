@@ -16,7 +16,7 @@ body {
 
 .answer {
     font-size: larger;
-    color: blue;
+    color: black;
 }
 
 .radio-label {
@@ -40,4 +40,12 @@ body {
 
 .wrong-answer {
     color: red;
+}
+
+.explanation {
+    display: none;
+}
+
+.wrong-answer ~ .explanation {
+  display: block;
 }
