@@ -9,6 +9,7 @@ function init() {
         labelClass: "radio-label",
         correctAnswerClass: "correct-answer",
         wrongAnswerClass: "wrong-answer",
+        explanationClass: "explanation",
         submitButtonId: "submit"});
     quizObject.parseQuizFromJson().then(() => {
         quizObject.displayHTMLQuiz()
