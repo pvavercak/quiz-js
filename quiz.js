@@ -65,7 +65,6 @@ class Quiz {
                     options.push(
                         `<label class="${this.labelClass}">
                         <input type="radio" name="q${index}" value="${option}"/>
-                        ${option} :
                         ${question.answers[option]}
                         </label>`
                     );
