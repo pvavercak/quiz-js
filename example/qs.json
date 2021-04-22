@@ -1,0 +1,22 @@
+{
+    "quizData": [{
+        "question": "Who?",
+        "answers": {
+            "a": "Me",
+            "b": "You"
+        },
+        "correctAnswer": "a",
+        "explanation": "lebo"
+    },
+    {
+        "question": "Where?",
+        "answers": {
+            "a": "Slovakia",
+            "b": "Bratislava",
+            "c": "Elsewhere"
+        },
+        "correctAnswer": "a",
+        "explanation": "lebo"
+    }
+]
+}

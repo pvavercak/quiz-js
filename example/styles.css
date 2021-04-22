@@ -1,0 +1,43 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    color: black;
+    font-family: sans-serif;
+}
+
+.question {
+    font-size: x-large;
+    color: blue;
+    margin-top: 0.5em;
+}
+
+.answer {
+    font-size: larger;
+    color: blue;
+}
+
+.radio-label {
+    font-size: medium;
+    display: block;
+}
+
+.quiz {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.quiz-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.correct-answer {
+    color: green;
+}
+
+.wrong-answer {
+    color: red;
+}
