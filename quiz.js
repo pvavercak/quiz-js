@@ -3,7 +3,18 @@
  */
 
 class Quiz {
-
+    /**
+     * divId - id of div element where to put parsed quiz
+     * jsonPath - path for .json file containing questions
+     * answerClass - specifies styling class for answers
+     * questionClass - specifies styling class for questions
+     * labelClass - specifies styling class for each option in answers
+     * correctAnswerClass - styling class for correct answers
+     * wrongAnswerClass - styling class for wrong answers
+     * explanationClass - styling class for explanation text
+     * submitButtonId - id of a button for quiz submission
+     * @param {Object} - an object of type JSON specifying class names and ids of quiz
+     */
     constructor({divId, jsonPath, answerClass, questionClass, labelClass, 
         correctAnswerClass, wrongAnswerClass, explanationClass, submitButtonId}) {
         this.quiz = [];
@@ -19,6 +30,10 @@ class Quiz {
         this.submitButton = document.getElementById(submitButtonId);
     }
 
+    /**
+     * Loads json from file and builds quiz string containing html elements.
+     * @returns promise
+     */
     parseQuizFromJson = () => {
         return new Promise((resolve, reject) => {
             fetch(this.quizDataPath)
@@ -30,12 +45,15 @@ class Quiz {
         })
     }
 
+    /**
+     * Appends quiz string containing html elements to quiz container
+     */
     displayHTMLQuiz = () => {
         this.quizContainer.innerHTML = this.quiz.join('');
     }
 
     /**
-     * 
+     * Builds a string containing html elements that are parsed from input JSON file
      */
     buildHTMLQuiz = () => {
         this.quizData.forEach(
@@ -67,7 +85,7 @@ class Quiz {
     }
 
     /**
-     * 
+     * Evaluates all parsed answers on sumbit button click
      */
     checkQuizAnswers = () => {
         let answerContainers = this.quizContainer.querySelectorAll(`.${this.answerClass}`);
